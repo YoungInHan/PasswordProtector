@@ -4,12 +4,19 @@ public class Password {
 	
 	private String rawPass;
 	private String hiddenPass;
-	private 
+	private double strength;
 	
 	
-	Password(String password){
-		rawPass = password;
+	Password(){
+		rawPass = "";
 	}
+	
+	String getRawPassword(){
+		return rawPass;
+	}
+	
+	
+	
 	
 	
 	
