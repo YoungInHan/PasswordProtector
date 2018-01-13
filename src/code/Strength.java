@@ -13,11 +13,11 @@ public class Strength {
 	}
 	
 	Strength(String password){
-		strength = getStrength(password);
+		strength = calculateStrength(password);
 	}
 	
 	void setStrength(String password){
-		strength = getStrength(password);
+		strength = calculateStrength(password);
 	}
 	
 	int getStrength(){
@@ -85,7 +85,7 @@ public class Strength {
 		return numRep;
 	}
 	
-	static int getStrength(String password){
+	static int calculateStrength(String password){
 		int score = 0;
 		int length = password.length();
 		int numUpperCase = 0, numLowerCase=0, numNumbers =0, numSymbols =0;
