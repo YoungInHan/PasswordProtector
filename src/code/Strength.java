@@ -12,10 +12,6 @@ public class Strength {
 		strength =0;
 	}
 	
-	Strength(String password){
-		strength = calculateStrength(password);
-	}
-	
 	void setStrength(String password){
 		strength = calculateStrength(password);
 	}
