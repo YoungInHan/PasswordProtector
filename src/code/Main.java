@@ -8,8 +8,11 @@ public class Main {
 	public static void main(String[] args)throws Exception{
 		getConnection();
 
+		Password pass = new Password();
+		pass.setPassword("Hello");
 		
-		
+		System.out.println(pass.getRawPassword());
+		System.out.println(pass.getStrength());
 		
 	}
 	

@@ -8,11 +8,13 @@ public class Password {
 	
 	Password(){
 		rawPass = "";
+		strengthVal = new Strength();
+		
 	}
 	
 	void setPassword(String password){
 		rawPass = password;
-		strengthVal.setStrength(rawPass);
+		strengthVal.setStrength(password);
 	}
 	
 	
@@ -20,7 +22,9 @@ public class Password {
 		return rawPass;
 	}
 	
-	
+	int getStrength(){
+		return strengthVal.getStrength();
+	}
 	
 	
 	
