@@ -9,7 +9,7 @@ public class Main {
 		getConnection();
 
 		Password pass = new Password();
-		pass.setPassword("Hello");
+		pass.setPassword("fsd2$eD*");
 		
 		System.out.println(pass.getRawPassword());
 		System.out.println(pass.getStrength());

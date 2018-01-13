@@ -119,7 +119,7 @@ public class Strength {
 		if(numSymbols>0)
 			numRequirements++;
 		
-		int numConscLetter =0, numConscUpper =0, numConscLower=0, numConscNum=0;
+		int numConscUpper =0, numConscLower=0, numConscNum=0;
 		int numSeqCharacter=0, numRepeats=0;
 
 		//Look for Consecutive letters and numbers
@@ -176,6 +176,9 @@ public class Strength {
 
 		if(score >100){
 			score =100;
+		}
+		if(score <0){
+			score = 0;
 		}
 		
 		return score;
