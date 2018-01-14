@@ -6,12 +6,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+import javax.swing.JFrame;
+
 public class Main {
 
 	public static void main(String[] args)throws Exception{
+		
+		UserWindow window = new UserWindow();
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setVisible(true);
+		
+		/*
 		createTable();
-		post();
 		get();
+		
+		
 		
 		String password = "caliorbust";	
 		
@@ -26,7 +36,7 @@ public class Main {
 		Password pass2 = new Password(password);
 		pass2.setHiddenPassword(" *zC:LZC");
 		System.out.println(pass2.getRawPassword());
-		
+		*/
 	}
 	
 	public static ArrayList<String> get() throws Exception {
