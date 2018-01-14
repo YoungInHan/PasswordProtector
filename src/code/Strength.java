@@ -7,19 +7,38 @@ import java.util.regex.*;
 public class Strength {
 
 	private int strength;
+	private String grade;
 	
 	Strength(){
 		strength =0;
+		grade ="Very Weak";
 	}
 	
 	void setStrength(String password){
 		strength = calculateStrength(password);
+		setGrade();
 	}
 	
 	int getStrength(){
 		return strength;
 	}
 	
+	private void setGrade(){
+		if(strength <=20)
+			grade = "Very Weak";
+		else if(strength >20 && strength <= 40)
+			grade = "Weak";
+		else if(strength >40 && strength <= 60)
+			grade = "Good";
+		else if(strength >60 && strength <= 80)
+			grade = "Strong";
+		else
+			grade = "Very Strong";
+	}
+	
+	String getGrade(){
+		return grade;
+	}
 	
 	static int numConsecutive(String text, String pattern){
 		int numConsc =0;
