@@ -18,6 +18,8 @@ public class UserWindow extends JFrame{
     public UserWindow() {
         super("Password Protector");
          
+        labelUsername.setPreferredSize(new Dimension(100,100));
+        
         // create a new panel with GridBagLayout manager
         newPanel = new JPanel(new GridBagLayout());
          
