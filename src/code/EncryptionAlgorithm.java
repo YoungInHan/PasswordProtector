@@ -47,7 +47,7 @@ public class EncryptionAlgorithm {
 		key = toHex(key);
 		
 		//declare the user input password to be "userpass", could be any string
-		String passIn = "userpass";
+		String passIn = "hellowrdf";
 		
 		//print the encrypted password
 		StringBuffer encodedPass = new StringBuffer(Encryptor(passIn));
