@@ -5,13 +5,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JFrame;
 
 public class Main {
 
+		public static String password = "caliorbust";
 	public static void main(String[] args)throws Exception{
+<<<<<<< HEAD
 		
 		UserWindow window = new UserWindow();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,37 +28,64 @@ public class Main {
 		
 		
 		String password = "caliorbust";	
+=======
+		Scanner scan = new Scanner(System.in);
+		//create the table of user information (if doesn't already exist);
+		createTable();
+		
+>>>>>>> b0ddf29f8fffd385217708bbc8b1990d64cfa8a7
+		
+		inputColumn(password);
+		
+		get();
+	}
+	
+	public static void inputColumn(String password) throws Exception {
+		Scanner scan = new Scanner(System.in);
+		String websiteInput = "", usernameInput = "", passwordInput = "", passEncrypted = "";
+		System.out.println("enter a website");
+		websiteInput = scan.nextLine();
+		System.out.println("enter a username");
+		usernameInput = scan.nextLine();
+		System.out.println("enter a password");
+		passwordInput = scan.nextLine();
 		
 		Password pass = new Password(password);
-		pass.setRawPassword("fsd2$eD*");
+		pass.setRawPassword(passwordInput);
 		
-		System.out.println(pass.getRawPassword());
-		System.out.println(pass.getStrength());
-		System.out.println(pass.getGrade());
-		System.out.println(pass.getHiddenPass());
-		
+<<<<<<< HEAD
 		Password pass2 = new Password(password);
 		pass2.setHiddenPassword(" *zC:LZC");
 		System.out.println(pass2.getRawPassword());
 		*/
+=======
+		passEncrypted = pass.getHiddenPass();
+		
+		post(websiteInput, usernameInput, passEncrypted);
+>>>>>>> b0ddf29f8fffd385217708bbc8b1990d64cfa8a7
 	}
 	
 	public static ArrayList<String> get() throws Exception {
 		try{
 			Connection con = getConnection();
-			PreparedStatement statement = con.prepareStatement("SELECT website,username FROM bla");
-			
+			PreparedStatement statement = con.prepareStatement("SELECT website,username,password FROM bla");
 			ResultSet result = statement.executeQuery();
 			
 			ArrayList<String> array = new ArrayList<String>();
 			while(result.next()){
+				
+				Password unencryptedPass = new Password(password);
+				unencryptedPass.setHiddenPassword(result.getString("password"));
+	
 				System.out.print(result.getString("website"));
 				System.out.print(" ");
-				System.out.println(result.getString("username"));
+				System.out.print(result.getString("username"));
+				System.out.print(" ");
+				System.out.println(unencryptedPass.getRawPassword());
 				
 				array.add(result.getString("username"));
 			}
-			System.out.println("All records Selected");
+			System.out.println("Passwords selected");
 			return array;
 			
 		}catch(Exception e){System.out.println(e);}
@@ -62,10 +93,7 @@ public class Main {
 	}
 	
 	
-	public static void post() throws Exception{
-		final String var1 = "Jphn";
-		final String var2 = "Miller";
-		final String var3 = "ASDF";
+	public static void post(String var1, String var2, String var3) throws Exception{
 		try{
 			Connection con = getConnection();
 			PreparedStatement posted = con.prepareStatement("INSERT INTO bla (website, username, password) VALUES ('"+var1+"', '"+var2+ "', '"+var3+"')");
@@ -74,8 +102,6 @@ public class Main {
 		finally {
 			System.out.println("Insert Completed.");
 		}
-		
-		
 	}
 	
 	
