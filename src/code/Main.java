@@ -15,11 +15,15 @@ public class Main {
 	
 	public static void main(String[] args)throws Exception{
 
+		
+		
 		UserWindow w = new UserWindow();
 		w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		w.setVisible(true);
-				
-		/*
+		w.setSize(500, 500);;
+		
+		/*	
+		
 		String password = "caliorbust";
 		String username = "root";
 		
@@ -95,7 +99,7 @@ public class Main {
 			Connection con = getConnection(username, password);
 			PreparedStatement posted = con.prepareStatement("INSERT INTO userdata (website, username, password) VALUES ('"+website+"', '"+websiteUser+ "', '"+websitePass+"')");
 			posted.executeUpdate();
-		}catch(Exception e){System.out.println("!!!!!!!!!!!");}
+		}catch(Exception e){System.out.println(e);}
 		finally {
 			System.out.println("Insert Completed.");
 		}
