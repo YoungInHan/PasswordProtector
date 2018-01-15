@@ -37,10 +37,11 @@ public class UserWindow extends JFrame{
 	JLabel newPasswordLabel2 = new JLabel("Verify: ");
 	JPasswordField newPassword2 = new JPasswordField(10);		
 	JButton buttonAddPassword = new JButton("Add");
+	JLabel passwordStrength = new JLabel("Strength: ");
 	
 	
 	thehandler handler = new thehandler();
-	
+	KeyHandler keyhandler = new KeyHandler();
 	
     
     public UserWindow() {
@@ -156,14 +157,17 @@ public class UserWindow extends JFrame{
          
         constraints.gridx = 3;
         newPanel.add(newPassword, constraints);
+        newPassword.addKeyListener(keyhandler);
         
         constraints.gridx = 0;
-        constraints.gridy = 3;
+        constraints.gridy = 3;     
+        newPanel.add(passwordStrength, constraints);
+        
+        constraints.gridx = 0;
+        constraints.gridy = 4;
         constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.CENTER;
         newPanel.add(buttonAddPassword, constraints);
-		
-		
 		
 	}
     
@@ -222,4 +226,35 @@ public class UserWindow extends JFrame{
  
         }
     } 	
+    
+    private class KeyHandler implements KeyListener{
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			
+			String tryPassword = newPassword.getText();
+			Strength s = new Strength();
+			s.setStrength(tryPassword);
+			String grade = s.getGrade();
+			passwordStrength.setText("Strength: "+grade);
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+    	
+    	
+    	
+    }
+    
+    
 }
