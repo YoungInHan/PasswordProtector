@@ -20,7 +20,7 @@ public class Main {
 		UserWindow w = new UserWindow();
 		w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		w.setVisible(true);
-		w.setSize(500, 500);;
+		w.setSize(500, 500);
 		
 		/*	
 		
