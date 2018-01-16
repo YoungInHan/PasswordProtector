@@ -15,7 +15,7 @@ public class UserWindow extends JFrame{
     JLabel labelPassword = new JLabel("Enter password: ");
     JTextField textUsername = new JTextField(20);
     JPasswordField fieldPassword = new JPasswordField(20);
-    JButton buttonLogin = new JButton("submit");
+    JButton buttonLogin = new JButton("Submit");
     JPanel newPanel =new JPanel(new GridBagLayout());
     
     //main menu
@@ -38,6 +38,7 @@ public class UserWindow extends JFrame{
 	JPasswordField newPassword2 = new JPasswordField(10);		
 	JButton buttonAddPassword = new JButton("Add");
 	JLabel passwordStrength = new JLabel("Strength: ");
+	JButton backButton = new JButton("Go Back");
 	
 	
 	thehandler handler = new thehandler();
@@ -90,7 +91,8 @@ public class UserWindow extends JFrame{
     }
     
 	void mainMenu(String username, String password){
-	
+
+		//override login
 		newPanel.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createEtchedBorder(), "Main menu"));
 		labelUsername.setVisible(false);
@@ -98,6 +100,18 @@ public class UserWindow extends JFrame{
 		textUsername.setVisible(false);
 		fieldPassword.setVisible(false);
 		buttonLogin.setVisible(false);
+		
+		//override addnew
+		
+		newSiteLabel.setVisible(false);
+		newSiteName.setVisible(false);
+		newUserLabel.setVisible(false);
+		newUser.setVisible(false);
+		newPasswordLabel.setVisible(false);
+		newPassword.setVisible(false);
+		passwordStrength.setVisible(false);
+		buttonAddPassword.setVisible(false);
+		backButton.setVisible(false);
 		
 		ArrayList<String> sites = new ArrayList<String>();
 		try {
@@ -113,18 +127,21 @@ public class UserWindow extends JFrame{
 		constraints.gridx = 0;
 	    constraints.gridy = 0;
 	    newPanel.add(websiteBox, constraints);
+	    websiteBox.setVisible(true);
 	    
 	    constraints.gridx = 0;
 	    constraints.gridy = 1;
 	    newPanel.add(buttonGetPassword, constraints);
-		
+		buttonGetPassword.setVisible(true);
+	    
         buttonGetPassword.addActionListener(handler); 
         
         constraints.gridx = 0;
 	    constraints.gridy = 2;
-	    constraints.gridwidth = 10;
+	    constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.CENTER;
 	    newPanel.add(buttonNewPassword, constraints);
+	    buttonNewPassword.setVisible(true);
 	    
 	    buttonNewPassword.addActionListener(handler);
         
@@ -132,6 +149,9 @@ public class UserWindow extends JFrame{
 	}  
 	
 	void addWebsite(String username,String password){
+		newPanel.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createEtchedBorder(), "Add Password"));
+		
 		websiteBox.setVisible(false);
 		buttonGetPassword.setVisible(false);
 		buttonNewPassword.setVisible(false);
@@ -140,35 +160,49 @@ public class UserWindow extends JFrame{
         constraints.gridx = 0;
         constraints.gridy = 0;     
         newPanel.add(newSiteLabel, constraints);
+        newSiteLabel.setVisible(true);
  
         constraints.gridx = 3;
         newPanel.add(newSiteName, constraints);
+        newSiteName.setVisible(true);
          
         constraints.gridx = 0;
         constraints.gridy = 1;     
         newPanel.add(newUserLabel, constraints);
-         
+        newUserLabel.setVisible(true); 
+        
         constraints.gridx = 3;
         newPanel.add(newUser, constraints);
-         
+        newUser.setVisible(true); 
+        
         constraints.gridx = 0;
         constraints.gridy = 2;     
         newPanel.add(newPasswordLabel, constraints);
+        newPasswordLabel.setVisible(true);
          
         constraints.gridx = 3;
         newPanel.add(newPassword, constraints);
         newPassword.addKeyListener(keyhandler);
+        newPassword.setVisible(true);
         
         constraints.gridx = 0;
         constraints.gridy = 3;     
         newPanel.add(passwordStrength, constraints);
+        passwordStrength.setVisible(true);
         
         constraints.gridx = 0;
         constraints.gridy = 4;
         constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.CENTER;
         newPanel.add(buttonAddPassword, constraints);
+        buttonAddPassword.addActionListener(handler);
+        buttonAddPassword.setVisible(true);
 		
+        constraints.gridx = 0;
+        constraints.gridy = 5;     
+        newPanel.add(backButton, constraints);
+        backButton.setVisible(true);
+        backButton.addActionListener(handler);
 	}
     
     
@@ -196,9 +230,7 @@ public class UserWindow extends JFrame{
             }
             
             if(event.getSource()==buttonGetPassword){
-            	
-            	System.out.println(password);
-            	
+
             	String siteUserName ="Error";
             	String sitePassword="Error";
             	String site = (String)websiteBox.getSelectedItem();
@@ -221,8 +253,38 @@ public class UserWindow extends JFrame{
             
            if(event.getSource()==buttonNewPassword){
         	   addWebsite(username, password);
-        	   
            } 
+           
+           if(event.getSource()==buttonAddPassword){
+        	   String addNewWebsite ="";
+        	   String addNewUserName = "";
+        	   String addNewPassword ="";
+        	   
+        	   addNewWebsite = newSiteName.getText();
+        	   addNewUserName = newUser.getText();
+        	   addNewPassword = newPassword.getText();
+
+        	   if(!addNewWebsite.trim().isEmpty() && !addNewUserName.trim().isEmpty()&&!addNewPassword.trim().isEmpty()){
+        		   try{
+        			   Main.inputColumn(username, password, addNewWebsite, addNewUserName, addNewPassword);
+        		   }catch(Exception e){System.out.println(e);}
+        		   newSiteName.setText("");
+        		   newUser.setText("");
+        		   newPassword.setText("");
+        		   
+        		   
+        	   }
+        	   else{
+        		   JOptionPane.showMessageDialog(null, "One or more fields empty");
+        	   }
+        	   
+        	   //mainMenu(username, password);
+           }
+           
+           if(event.getSource()==backButton){
+        	   mainMenu(username, password);
+        	   
+           }
  
         }
     } 	
@@ -242,8 +304,7 @@ public class UserWindow extends JFrame{
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
+			// TODO Auto-generated method stub	
 		}
 
 		@Override
